@@ -8,14 +8,16 @@ var RandomUtils = require('./src/utils/random');
  *
  */
 function populateFile(path, args) {
-  var file = fs.readFileSync(path);
+  var file = fs.readFileSync(path).toString();
   for(var i in args) {
-    file.replace(i, args[i]);
+    file = file.replace(new RegExp('\\$\\$' + i, 'g'), args[i]);
   }
   fs.writeFileSync(path, file);
 }
 
 var files = [
+  'README.md',
+  'COPYWRITE.md',
   'config/config.json',
   'config/nginx.conf',
   'config/pm2-deploy.json',
@@ -26,16 +28,17 @@ var files = [
 var arguments = process.argv.slice(2);
 
 var args = {
-  projectName: arguments[0],
-  authorName: arguments[1],
-  projectHost: arguments[2],
-  dbHost: arguments[3],
-  dbUser: arguments[4],
-  dbPass: arguments[5],
+  projectName: arguments[0] || 'projName',
+  authorName: arguments[1] || 'authName',
+  projectDesc: arguments[2] || 'projDesc',
+  projectHost: arguments[3] || 'projHost',
+  dbHost: arguments[4] || 'dbHost',
+  dbUser: arguments[5] || 'dbUser',
+  dbPass: arguments[6] || 'dbPass',
   cwd: process.cwd()
 };
 
-RandomUtils.getRandom(64, function(jwtSecret) {
+RandomUtils.getRandom(128, function(jwtSecret) {
   args.jwtSecret = jwtSecret;
   for(var i in files) {
     populateFile(files[i], args);

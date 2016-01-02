@@ -2,19 +2,22 @@
 echo "What is the name of the project?  This project will also be created under this name on Github."
 read project
 
-echo "What is your GitHub username?"
-read username
+echo "What does this project do?"
+read projectDesc
+
 
 echo "What is the hostname of the project's API?"
 read projectHost
 
+echo "What is your GitHub username?"
+read username
 
-#curl --silent -u "$username" https://api.github.com/user/repos -d "{\"name\":\"$project\"}" >/dev/null
+curl --silent -u "$username" https://api.github.com/user/repos -d "{\"name\":\"$project\"}" >/dev/null
 
-#git clone git@github.com:Emblem21/janus-prototype $project
-#cd $project
-#rm -fr .git
-#git init
+git clone git@github.com:Emblem21/janus-prototype $project
+cd $project
+rm -fr .git
+git init
 
 echo "What is your database host?"
 read dbHost
@@ -23,18 +26,23 @@ read dbUser
 echo "What is your database password?"
 read -s dbPass
 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/$project.key -out /etc/nginx/ssl/project.crt
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/$project.key -out /etc/nginx/ssl/$project.crt
 
-./install.js $project $username $projectHost $dbHost $dbUser $dbPass
+./install.js $project $username $projectDesc $projectHost $dbHost $dbUser $dbPass
 
-#git add .
-#git commit -m "Boilerplate commit"
-#git remote add origin git@github.com:$username/$project.git
-#git push -u origin master
-#git checkout -b develop
-#git merge master
-#git push -u origin develop
-#git checkout develop
+git add .
+git commit -m "Boilerplate commit"
+git remote add origin git@github.com:$username/$project.git
+git push -u origin master
+git checkout -b develop
+git merge master
+git push -u origin develop
+git checkout develop
+
+mkdir logs
+touch logs/err.log
+touch logs/out.log
+touch database.db
 
 echo ""
 echo "================================================================================"
@@ -45,3 +53,5 @@ echo "==========================================================================
 echo "./release"
 echo "================================================================================"
 
+rm install.js
+rm new

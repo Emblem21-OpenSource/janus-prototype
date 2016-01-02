@@ -17,7 +17,7 @@ var service = module.exports = {
       length = 32;
     }
 
-    return crypto.randomBytes(16, function(ex, buf) {
+    return crypto.randomBytes(length, function(ex, buf) {
       done(buf.toString('hex').substr(0, length));
     });
   },

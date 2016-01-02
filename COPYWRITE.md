@@ -1,5 +1,5 @@
-Name: Janus Engine
-Company: Emblem 21
+Name: $$projectName
+Company: $$authorName
 Version: <%= version %>
-Source: http://somethingsomething
-License: http://somethingsomething
+Source: http://$$projectHost
+License: https://raw.githubusercontent.com/$$authorName/$$projectName/master/LICENSE.md

@@ -27,7 +27,7 @@
         "test": "sqlite"
       },
       "sqlite": {
-        "name": "$projectName",
+        "name": "$$projectName",
         "username": "$$dbUser",
         "password": "$$dbPass",
         "host": "$$dbHost",
