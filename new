@@ -26,9 +26,15 @@ read dbUser
 echo "What is your database password?"
 read -s dbPass
 
+echo "Generating SSL cert for local Nginx..."
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/$project.key -out /etc/nginx/ssl/$project.crt
 
 ./install.js $project $username $projectDesc $projectHost $dbHost $dbUser $dbPass
+
+npm install
+
+#rm install.js
+#rm new
 
 git add .
 git commit -m "Boilerplate commit"
@@ -39,19 +45,9 @@ git merge master
 git push -u origin develop
 git checkout develop
 
-mkdir logs
-touch logs/err.log
-touch logs/out.log
-touch database.db
-
 echo ""
 echo "================================================================================"
-echo "$project has been successfully made.  Your local checkout is in the develop branch."
-echo "When you are ready to release your package, push all your changes to develop," 
-echo "then follow these instructions:"
+echo "$project has been successfully made.  Run your server now with:"
 echo "================================================================================"
-echo "./release"
+echo "npm run dev"
 echo "================================================================================"
-
-rm install.js
-rm new

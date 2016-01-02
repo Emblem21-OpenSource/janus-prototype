@@ -1,47 +1,20 @@
-var jwt = require('jsonwebtoken');
-var uuid = require('uuid');
+var TokenGenerator = require('janus-token');
 
-module.exports = {
+var trainingData = [
+  { input: { userAgent: 1,    language: 1, referer: 1, requestData: 0 }, output: { integrity: 1 } },
+  { input: { userAgent: 0.5,  language: 1, referer: 1, requestData: 0 }, output: { integrity: 0.25 } },
+  { input: { userAgent: 0.25, language: 1, referer: 1, requestData: 0 }, output: { integrity: 0.1 } },
+  { input: { userAgent: 1,    language: 1, referer: 1, requestData: 0.02 }, output: { integrity: 0.9 } },
+  { input: { userAgent: 1,    language: 1, referer: 1, requestData: 0.15 }, output: { integrity: 0.75 } },
+  { input: { userAgent: 1,    language: 1, referer: 1, requestData: 0.29 }, output: { integrity: 0.25 } },
+  { input: { userAgent: 0.5,  language: 1, referer: 1, requestData: 0.02 }, output: { integrity: 0.10 } },
+  { input: { userAgent: 0.5,  language: 1, referer: 1, requestData: 0.15 }, output: { integrity: 0.05 } },
+  { input: { userAgent: 0.5,  language: 1, referer: 1, requestData: 0.29 }, output: { integrity: 0.01 } },
+  { input: { userAgent: 0.25, language: 1, referer: 1, requestData: 0.02 }, output: { integrity: 0.01 } },
+  { input: { userAgent: 0.25, language: 1, referer: 1, requestData: 0.15 }, output: { integrity: 0.001 } },
+  { input: { userAgent: 0.25, language: 1, referer: 1, requestData: 0.29 }, output: { integrity: 0.0001 } },
+  { input: { userAgent: 1,    language: 0, referer: 1, requestData: 0 }, output: { integrity: 0.001 } },
+  { input: { userAgent: 1,    language: 1, referer: 0, requestData: 0 }, output: { integrity: 0.001 } }
+];
 
-  /**
-   *
-   */
-  create: function(identifier, properties) {
-    return jwt.sign({
-      identifier: identifier,
-      properties: properties || {}
-    }, Config.api.jwt.secret, Config.api.jwt);
-  },
-
-  /**
-   *
-   */
-  decode: function(token, next, error) {
-    jwt.verify(token, Config.api.jwt.secret, Config.api.jwt, function (err, decoded) {
-      if (err || !decoded.identifier) {
-        return error(err || !decoded.identifier);
-      }
-      return next(decoded);
-    });
-  },
-
-  /**
-   *
-   */
-  generateKeySegments: function() {
-    var result = '';
-    for(var j = 1, max = 50; j<max; j++) {
-      result += ':'+j+':' + crypto.randomBytes(256).toString('base64');
-    }
-    return result;
-  },
-
-  /**
-   *
-   */
-  generateResourceId: function(entropy) {
-    return RandomUtil.getSha256(entropy + uuid.v4({
-      rng: uuid.nodeRNG
-    }));
-  }
-};
+module.exports = new TokenGenerator(trainingData, Config.api.jwt.secret, Config.api.jwt.issuer, Config.api.jwt.audience);

@@ -77,7 +77,7 @@ module.exports = {
           });
 
           request.on('end', function() {
-            request.body = JSON.parse(body);
+            request.body = JSON.parse(body || null);
             route(request, response);
           });
         } else {

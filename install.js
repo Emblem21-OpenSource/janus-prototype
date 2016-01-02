@@ -18,6 +18,7 @@ function populateFile(path, args) {
 var files = [
   'README.md',
   'COPYWRITE.md',
+  'package.json',
   'config/config.json',
   'config/nginx.conf',
   'config/pm2-deploy.json',
@@ -28,13 +29,13 @@ var files = [
 var arguments = process.argv.slice(2);
 
 var args = {
-  projectName: arguments[0] || 'projName',
-  authorName: arguments[1] || 'authName',
-  projectDesc: arguments[2] || 'projDesc',
-  projectHost: arguments[3] || 'projHost',
-  dbHost: arguments[4] || 'dbHost',
-  dbUser: arguments[5] || 'dbUser',
-  dbPass: arguments[6] || 'dbPass',
+  projectName: arguments[0],
+  authorName: arguments[1],
+  projectDesc: arguments[2],
+  projectHost: arguments[3],
+  dbHost: arguments[4],
+  dbUser: arguments[5],
+  dbPass: arguments[6],
   cwd: process.cwd()
 };
 
