@@ -33,8 +33,8 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/
 
 npm install
 
-#rm install.js
-#rm new
+rm install.js
+rm new
 
 git add .
 git commit -m "Boilerplate commit"
