@@ -1,0 +1,65 @@
+{
+  "build": {
+    "js": {
+      "source": "src/web/js/*.js",
+      "destination": "build"
+    },
+    "css": {
+      "source": "src/web/css/*.css",
+      "destination": "build"
+    },
+    "html": {
+      "source": "src/web/html/*.html",
+      "destination": "build"
+    },
+    "images": {
+      "source": "src/web/images/*.png",
+      "destination": "build"
+    },
+    "copywrite": "COPYWRITE.md"
+  },
+  "api": {
+    "cluster": false,
+    "database": {
+      "environments": {
+        "production": "sqlite",
+        "development": "sqlite",
+        "test": "sqlite"
+      },
+      "sqlite": {
+        "name": "$projectName",
+        "username": "$$dbUser",
+        "password": "$$dbPass",
+        "host": "$$dbHost",
+        "dialect": "sqlite",
+        "pool": {
+          "max": 5,
+          "min": 0,
+          "idle": 1000
+        },
+        "storage": "database.db",
+        "logging": false
+      }
+    },
+    "http" : {
+      "port": 8880,
+      "robotsTxt": {},
+      "humansTxt": {}
+    },
+    "jwt": {
+      "secret": "$$jwtSecret",
+      "algorithm": "HS256",
+      "issuer": "$$projectHost",
+      "audience": "$$projectHost"
+    },
+    "messages": {
+      
+    }
+  },
+  "public": {
+
+  },
+  "vendors": {
+
+  }
+}

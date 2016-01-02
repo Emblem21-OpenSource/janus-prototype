@@ -1,0 +1,18 @@
+{
+  "apps" : [{
+    // Application #1
+    "name"        : "prod-api",
+    "script"      : "index.js",
+    "args"        : [],
+    "watch"       : false,
+    //"node_args"   : "--harmony",
+    "merge_logs"  : true,
+    "env": {
+        "NODE_ENV": "production"
+    },
+    "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+    "error_file" : "./logs/err.log",
+    "out_file"   : "./logs/out.log",
+    "pid_file"   : "./$$projectName.pid"
+  }]
+}

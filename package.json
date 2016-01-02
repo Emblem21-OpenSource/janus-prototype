@@ -1,0 +1,48 @@
+{
+  "name": "$$projectName",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test node test",
+    "dev": "./node_modules/.bin/pm2 stop all;./node_modules/.bin/pm2 delete all;./node_modules/.bin/gulp watch",
+    "start": "./node_modules/.bin/pm2 stop all;./node_modules/.bin/pm2 delete all;./node_modules/.bin/pm2 start config/pm2-prod.json",
+    "stats": "./node_modules/.bin/pm2 monit",
+    "log": "./node_modules/.bin/pm2 logs --timestamp --lines 0",
+    "flush": "./node_modules/.bin/pm2 flush",
+    "stop": "./node_modules/.bin/pm2 stop all;",
+    "restart": "./node_modules/.bin/pm2 restart all",
+    "watch": "./node_modules/.bin/gulp watch",
+    "build": "./node_modules/.bin/gulp build"
+  },
+  "author": "$authorName",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.0",
+    "bcrypt": "^0.8.5",
+    "brain": "^0.7.0",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "janus-shuffle": "^1.0.0",
+    "janus-token": "^1.0.0",
+    "janus-transaction": "^1.0.0",
+    "jasmine": "^2.3.2",
+    "lodash": "^3.10.1",
+    "sequelize": "^3.14.1",
+    "sqlite3": "^3.1.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.7.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp.spritesmith": "^5.0.1",
+    "jshint": "^2.8.0",
+    "pm2": "^0.15.10",
+    "supertest": "^1.1.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "apps" : [{
+    "name"        : "dev-api",
+    "script"      : "index.js",
+    "args"        : ["--dev", "--rebuild"],
+    "watch"       : ["src","config","test","gulpfile.js","index.js","package.json"],
+    "ignore_watch": ["src/web","build","docs","logs","node_modules"],
+    "watch_options": {
+        "usePolling": true
+    },
+    "timestamp": true,
+    "merge_logs"  : true,
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+    "error_file" : "./logs/err.log",
+    "out_file"   : "./logs/out.log",
+    "pid_file"   : "./$$projectName.pid"
+  }]
+}

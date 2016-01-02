@@ -1,0 +1,23 @@
+{
+  "deploy" : {
+    "prod" : {
+      "user" : "node",
+      "host" : "$$projectHost",
+      "path" : "$$cwd",
+      "post-deploy" : "pm2 startOrRestart pm2-prod.json",
+      "pre-deploy-local" : "echo 'This is a local executed command'",
+      "env"  : {
+        "NODE_ENV": "production"
+      }
+    },
+    "dev" : {
+      "user" : "node",
+      "host" : "localhost",
+      "path" : "$$cwd",
+      "post-deploy" : "pm2 startOrRestart pm2-dev.json",
+      "env"  : {
+        "NODE_ENV": "development"
+      }
+    }
+  }
+}

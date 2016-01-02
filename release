@@ -1,0 +1,9 @@
+git stash
+git checkout master
+git pull origin develop
+git commit -m "Releasing changes"
+git tag 1.0.0
+git push origin master --tags
+npm publish
+git checkout develop
+git stash pop
