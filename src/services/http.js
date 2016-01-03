@@ -77,7 +77,11 @@ module.exports = {
           });
 
           request.on('end', function() {
-            request.body = JSON.parse(body || null);
+            try {
+              request.body = JSON.parse(body || null);
+            } catch(e) {
+              response.error('Invalid body');
+            }
             route(request, response);
           });
         } else {

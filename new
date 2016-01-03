@@ -5,7 +5,6 @@ read project
 echo "What does this project do?"
 read projectDesc
 
-
 echo "What is the hostname of the project's API?"
 read projectHost
 
@@ -47,7 +46,8 @@ git checkout develop
 
 echo ""
 echo "================================================================================"
-echo "$project has been successfully made.  Run your server now with:"
+echo "$project has been successfully made.  Move to the directory"
+echo "(cd $project) and run your server with:"
 echo "================================================================================"
 echo "npm run dev"
 echo "================================================================================"
