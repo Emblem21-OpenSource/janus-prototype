@@ -36,21 +36,17 @@ var service = module.exports = {
   /**
    *
    */
-  encrypt: function(string, done) {
+  encrypt: function(string, key, done) {
     var self = this;
-    this.getRandom(32, function(key) {
-      self.getRandom(12, function(iv) {
-        var cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
-        var encrypted = cipher.update(string, 'utf8', 'hex');
-        encrypted += cipher['final']('hex');
-        var tag = cipher.getAuthTag().toString('hex');
-        return done({
-          content: encrypted,
-          tag: tag,
-          iv: iv,
-          key: key,
-          address: self.getSha256([encrypted, tag, iv, key].join('-'))
-        });
+    self.getRandom(12, function(iv) {
+      var cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+      var encrypted = cipher.update(string, 'utf8', 'hex');
+      encrypted += cipher['final']('hex');
+      var tag = cipher.getAuthTag().toString('hex');
+      return done({
+        content: encrypted,
+        tag: tag,
+        iv: iv
       });
     });
   },

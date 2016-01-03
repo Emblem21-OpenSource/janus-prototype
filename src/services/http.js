@@ -80,9 +80,9 @@ module.exports = {
             try {
               request.body = JSON.parse(body || null);
             } catch(e) {
-              response.error('Invalid body');
+              return response.error('Invalid body');
             }
-            route(request, response);
+            return route(request, response);
           });
         } else {
           // Handle a GET, HEAD, or OPTIONS call

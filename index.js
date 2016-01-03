@@ -26,4 +26,6 @@ if(program.log === 'console') {
   program.log = function() {};
 }
 
-require('./src/startup')(program);
+require('./src/startup')(program, function() {}, function(err) { 
+  console.error(err);
+});
